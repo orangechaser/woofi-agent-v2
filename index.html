@@ -29,7 +29,7 @@
                     keyframes: {
                         'pulse-subtle': {
                             '0%, 100%': { opacity: 1, borderColor: 'rgba(0, 181, 255, 0.2)' },
-                            '50%': { opacity: 0.8, borderColor: 'rgba(0, 181, 255, 0.5)' },
+                            '50%': { opacity: 0.8, borderColor: 'rgba(0, 181, 255, 0.4)' },
                         }
                     }
                 }
@@ -86,10 +86,10 @@
             display: grid; grid-template-columns: 120px 1fr; gap: 20px; align-items: center;
         }
         .action-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 181, 255, 0.2); 
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(0, 181, 255, 0.15); 
             border-radius: 12px; padding: 12px 14px;
-            display: flex; align-items: center; justify-content: center; gap: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
             font-size: 11px; font-weight: 800; color: #FFFFFF;
             text-transform: uppercase; letter-spacing: 0.05em;
             transition: all 0.3s;
@@ -112,13 +112,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .dropdown-container:hover .dropdown-menu { display: block; }
-        .dropdown-item { padding: 8px 12px; border-radius: 8px; font-size: 12px; color: rgba(255,255,255,0.5); }
-        .dropdown-item:hover { background: rgba(255,255,255,0.05); color: #FFFFFF; }
     </style>
 </head>
 <body class="grid-bg min-h-screen flex flex-col">
 
-    <!-- Header (REPAIRED) -->
+    <!-- Header -->
     <nav class="h-16 flex justify-between items-center px-8 sticky top-0 z-50 bg-[#07080A]/90 backdrop-blur-xl border-b border-wooLine">
         <div class="flex items-center gap-10">
             <div class="flex items-center">
@@ -161,13 +159,13 @@
 
         <div class="flex flex-col md:flex-row items-stretch gap-6 w-full max-w-5xl mx-auto mb-12">
             
-            <!-- Path: Agent (LEFT) -->
+            <!-- Path: Agent (Robot Icon + Lower Case) -->
             <div class="path-card border-wooCyan/20 bg-wooCyan/[0.01]">
                 <div class="flex items-center gap-3 mb-8">
                     <div class="w-8 h-8 bg-wooCyan/10 rounded-lg flex items-center justify-center border border-wooCyan/20 group-hover:bg-wooCyan group-hover:text-wooBlack transition-all">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 8V4H8"></path><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold woo-gradient-text uppercase tracking-tight">I'm an Agent</h3>
+                    <h3 class="text-xl font-bold woo-gradient-text tracking-tight">I'm an agent</h3>
                 </div>
                 <div class="agent-terminal flex-1">
                     <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-3">
@@ -182,39 +180,39 @@
                 </div>
             </div>
 
-            <!-- Path: Human (WAKING UP THE BUTTONS) -->
+            <!-- Path: Human (Lower Case + Screenshot Icons) -->
             <div class="path-card">
                 <div class="flex items-center gap-3 mb-8">
                     <div class="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center border border-white/5 group-hover:woo-gradient-bg group-hover:text-wooBlack transition-all">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white group-hover:text-wooCyan transition-colors uppercase tracking-tight">I'm a Human</h3>
+                    <h3 class="text-xl font-bold text-white group-hover:text-wooCyan transition-colors tracking-tight">I'm a human</h3>
                 </div>
                 <div class="flex flex-col justify-between flex-1 gap-5">
                     <div class="feature-item">
                         <a href="https://woofi.com/" class="action-btn animate-pulse-subtle">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B5FF" stroke-width="3" stroke-linecap="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B5FF" stroke-width="3" stroke-linecap="round"><path d="M12 3V21M17 8L12 3L7 8M17 16L12 21L7 16" stroke-width="2.5"/></svg>
                             Perps
                         </a>
                         <p class="feature-desc">50x leverage trading across ~100 of pairs.</p>
                     </div>
                     <div class="feature-item">
                         <a href="https://woofi.com/swap/" class="action-btn animate-pulse-subtle" style="animation-delay: 0.5s;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B5FF" stroke-width="3" stroke-linecap="round"><path d="M12 4L12 20"></path><path d="M17 15L12 20L7 15"></path><path d="M12 4L7 9L17 9"></path></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B5FF" stroke-width="3" stroke-linecap="round"><path d="M7 8l5-5 5 5M7 16l5 5 5-5" stroke-width="2.5"/></svg>
                             Swap
                         </a>
                         <p class="feature-desc">Ultra-low slippage cross-chain swaps on 13+ chains.</p>
                     </div>
                     <div class="feature-item">
                         <a href="https://woofi.com/swap/earn" class="action-btn animate-pulse-subtle" style="animation-delay: 1s;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B5FF" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8V16"></path><path d="M8 12H16"></path></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B5FF" stroke-width="3" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke-width="2.5"/></svg>
                             Earn
                         </a>
                         <p class="feature-desc">Single-sided yield with NO IL, earn up to 7.5% real returns.</p>
                     </div>
                     <div class="feature-item">
                         <a href="https://woofi.com/swap/stake" class="action-btn animate-pulse-subtle" style="animation-delay: 1.5s;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B5FF" stroke-width="3" stroke-linecap="round"><path d="M12 2L2 7L12 12L22 7L12 2Z"></path><path d="M2 12L12 17L22 12"></path><path d="M2 17L12 22L22 17"></path></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00B5FF" stroke-width="3" stroke-linecap="round"><path d="M12 2L2 7L12 12L22 7L12 2Z M2 12L12 17L22 12 M2 17L12 22L22 17" stroke-width="2"/></svg>
                             Stake
                         </a>
                         <p class="feature-desc">Stake WOO to share fees, join campaigns, and capture airdrops.</p>
