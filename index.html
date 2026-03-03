@@ -70,7 +70,8 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             display: flex;
             flex-direction: column;
-            height: 440px; /* Fixed balanced height */
+            padding: 40px; /* Generous but balanced padding */
+            flex: 1;
         }
         .path-card:hover { border-color: rgba(0, 181, 255, 0.3); transform: translateY(-4px); }
         
@@ -82,25 +83,26 @@
             background: #1E2329;
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 12px;
-            padding: 20px;
+            padding: 24px;
             font-family: 'JetBrains Mono', monospace;
-            flex: 1;
+            height: 100%;
         }
 
-        /* Unified Human Row Styling */
         .feature-item {
             display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 16px;
+            grid-template-columns: 120px 1fr;
+            gap: 20px;
             align-items: center;
-            padding: 4px 0;
         }
         .action-btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             font-size: 11px;
             font-weight: 800;
             color: #FFFFFF;
@@ -109,11 +111,11 @@
             transition: all 0.2s;
         }
         .action-btn:hover {
-            background: rgba(0, 181, 255, 0.1);
-            border-color: rgba(0, 181, 255, 0.3);
+            background: rgba(0, 181, 255, 0.08);
+            border-color: rgba(0, 181, 255, 0.4);
             color: #00B5FF;
         }
-        .feature-desc { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.4; }
+        .feature-desc { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
 
         .dropdown-menu { display: none; position: absolute; top: 100%; right: 0; background: #131519; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 8px; min-width: 160px; z-index: 100; }
         .group:hover .dropdown-menu { display: block; }
@@ -126,11 +128,7 @@
         <div class="flex items-center gap-10">
             <div class="flex items-center">
                 <svg id="WOOFi_Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265.91 54" class="h-7 w-auto">
-                    <defs>
-                        <linearGradient id="woo_grad" x1="242.02" y1="-2.26" x2="204.93" y2="50.71" gradientUnits="userSpaceOnUse">
-                            <stop offset="0" stop-color="#47fcaa"/><stop offset=".5" stop-color="#00b5ff"/><stop offset="1" stop-color="#1d4ab3"/>
-                        </linearGradient>
-                    </defs>
+                    <defs><linearGradient id="woo_grad" x1="242.02" y1="-2.26" x2="204.93" y2="50.71" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#47fcaa"/><stop offset=".5" stop-color="#00b5ff"/><stop offset="1" stop-color="#1d4ab3"/></linearGradient></defs>
                     <g fill="#fff">
                         <path d="m108.57,0c-14.91,0-27,12.09-27,27s12.09,27,27,27,27-12.09,27-27S123.48,0,108.57,0Zm0,41.5c-8.01,0-14.5-6.49-14.5-14.5s6.49-14.5,14.5-14.5,14.5,6.49,14.5,14.5-6.49,14.5-14.5,14.5Z"/><path d="m171.57,0c-14.91,0-27,12.09-27,27s12.09,27,27,27,27-12.09,27-27S186.48,0,171.57,0Zm0,41.5c-8.01,0-14.5-6.49-14.5-14.5s6.49-14.5,14.5-14.5,14.5,6.49,14.5,14.5-6.49,14.5-14.5,14.5Z"/><path d="m0,1h13.07l10.27,33.58,7-17.33c.92-2.27,3.12-3.75,5.56-3.75h4.98c2.45,0,4.65,1.48,5.56,3.75l7,17.33,3.85-12.58h13.07l-8.18,26.75c-.77,2.52-3.1,4.25-5.74,4.25h-4.58c-2.45,0-4.65-1.48-5.56-3.75l-7.91-19.57-7.91,19.57c-.92,2.27-3.12,3.75-5.56,3.75h-4.58c-2.64,0-4.97-1.72-5.74-4.25L0,1Z"/><polygon points="63.71 1 59.89 13.5 72.96 13.5 76.79 1 63.71 1"/>
                     </g>
@@ -144,11 +142,7 @@
                 <a href="https://woofi.com/swap/stake" class="nav-link">Stake</a>
                 <div class="relative group h-16 flex items-center">
                     <div class="flex items-center gap-1 nav-link cursor-pointer">More <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item block">Docs</a>
-                        <a href="#" class="dropdown-item block">Analytics</a>
-                        <a href="#" class="dropdown-item block">Brand Kit</a>
-                    </div>
+                    <div class="dropdown-menu"><a href="#" class="dropdown-item block">Docs</a><a href="#" class="dropdown-item block">Analytics</a><a href="#" class="dropdown-item block">Brand Kit</a></div>
                 </div>
             </div>
         </div>
@@ -157,8 +151,6 @@
 
     <!-- Main Hero -->
     <main class="flex-1 flex flex-col justify-center px-8 py-10 max-w-7xl mx-auto w-full">
-        
-        <!-- Refined Single Line Title -->
         <div class="text-center mb-10">
             <h1 class="font-din text-[32px] md:text-[38px] font-bold tracking-tight text-white mb-3 uppercase">
                 <span class="woo-gradient-text">Agent-first</span> onchain execution & liquidity layer.
@@ -168,68 +160,65 @@
             </p>
         </div>
 
-        <!-- Identity Choice -->
-        <div class="flex flex-col md:flex-row gap-6 w-full max-w-5xl mx-auto mb-12">
+        <!-- Identity Choice: FORCED TOP ALIGNMENT -->
+        <div class="flex flex-col md:flex-row items-stretch gap-6 w-full max-w-5xl mx-auto mb-12">
             
             <!-- Path: Agent -->
-            <div class="flex-1 path-card p-8 group cursor-pointer border-wooCyan/20 bg-wooCyan/[0.01]">
-                <div class="flex items-center gap-3 mb-6">
+            <div class="path-card border-wooCyan/20 bg-wooCyan/[0.01]">
+                <div class="flex items-center gap-3 mb-8">
                     <div class="w-8 h-8 bg-wooCyan/10 rounded-lg flex items-center justify-center border border-wooCyan/20 group-hover:bg-wooCyan group-hover:text-wooBlack transition-all">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                     </div>
-                    <h3 class="text-xl font-bold woo-gradient-text">I'm an Agent</h3>
+                    <h3 class="text-xl font-bold woo-gradient-text uppercase tracking-tight">I'm an Agent</h3>
                 </div>
-                
-                <div class="agent-terminal">
+                <div class="agent-terminal flex-1">
                     <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-3">
                         <span class="text-[9px] text-wooCyan font-bold tracking-widest opacity-80 uppercase">Protocol V1.0</span>
-                        <div class="flex gap-1">
-                            <div class="w-1.5 h-1.5 rounded-full bg-red-500/40"></div>
-                            <div class="w-1.5 h-1.5 rounded-full bg-yellow-500/40"></div>
-                            <div class="w-1.5 h-1.5 rounded-full bg-green-500/40"></div>
-                        </div>
+                        <div class="flex gap-1"><div class="w-1.5 h-1.5 rounded-full bg-red-500/40"></div><div class="w-1.5 h-1.5 rounded-full bg-yellow-500/40"></div><div class="w-1.5 h-1.5 rounded-full bg-green-500/40"></div></div>
                     </div>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-white/30 text-[8px] uppercase tracking-tighter mb-1">Context</p>
-                            <a href="https://api.woofi.com/llms.txt" class="text-wooCyan text-[10px] hover:text-white transition-colors block truncate font-mono">api.woofi.com/llms.txt</a>
-                        </div>
-                        <div>
-                            <p class="text-white/30 text-[8px] uppercase tracking-tighter mb-1">Definition</p>
-                            <a href="https://woofi.com/skill.md" class="text-wooCyan text-[10px] hover:text-white transition-colors block truncate font-mono">woofi.com/skill.md</a>
-                        </div>
-                        <div class="pt-1 opacity-20">
-                            <code class="text-white text-[9px]">$ install @woofi/agent</code>
-                        </div>
+                    <div class="space-y-5">
+                        <div><p class="text-white/30 text-[8px] uppercase tracking-tighter mb-1">Context</p><a href="https://api.woofi.com/llms.txt" class="text-wooCyan text-[10px] hover:text-white transition-colors block truncate font-mono">api.woofi.com/llms.txt</a></div>
+                        <div><p class="text-white/30 text-[8px] uppercase tracking-tighter mb-1">Definition</p><a href="https://woofi.com/skill.md" class="text-wooCyan text-[10px] hover:text-white transition-colors block truncate font-mono">woofi.com/skill.md</a></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Path: Human (Refined Rows with Inner Buttons) -->
-            <div class="flex-1 path-card p-8 group cursor-pointer">
-                <div class="flex items-center gap-3 mb-6">
+            <!-- Path: Human -->
+            <div class="path-card">
+                <div class="flex items-center gap-3 mb-8">
                     <div class="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center border border-white/5 group-hover:woo-gradient-bg group-hover:text-wooBlack transition-all">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white group-hover:text-wooCyan transition-colors">I'm a Human</h3>
+                    <h3 class="text-xl font-bold text-white group-hover:text-wooCyan transition-colors uppercase tracking-tight">I'm a Human</h3>
                 </div>
-
-                <div class="flex flex-col gap-5 flex-1 justify-center">
+                <div class="flex flex-col justify-between flex-1 gap-5">
                     <div class="feature-item">
-                        <a href="https://woofi.com/" class="action-btn">Perps</a>
+                        <a href="https://woofi.com/" class="action-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+                            Perps
+                        </a>
                         <p class="feature-desc">50x leverage trading across hundreds of pairs.</p>
                     </div>
                     <div class="feature-item">
-                        <a href="https://woofi.com/swap/" class="action-btn">Swap</a>
+                        <a href="https://woofi.com/swap/" class="action-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M16 3h5v5"></path><path d="M8 21H3v-5"></path><path d="M13 11l8-8"></path><path d="M11 13l-8 8"></path></svg>
+                            Swap
+                        </a>
                         <p class="feature-desc">Ultra-low slippage cross-chain swaps on 13+ chains.</p>
                     </div>
                     <div class="feature-item">
-                        <a href="https://woofi.com/swap/earn" class="action-btn">Earn</a>
+                        <a href="https://woofi.com/swap/earn" class="action-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 1v22"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            Earn
+                        </a>
                         <p class="feature-desc">Single-sided yield with NO impermanent loss.</p>
                     </div>
                     <div class="feature-item">
-                        <a href="https://woofi.com/swap/stake" class="action-btn">Stake</a>
-                        <p class="feature-desc">Stake WOO to capture fees and airdrop rewards.</p>
+                        <a href="https://woofi.com/swap/stake" class="action-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                            Stake
+                        </a>
+                        <p class="feature-desc">Stake WOO to capture fees and rewards.</p>
                     </div>
                 </div>
             </div>
@@ -242,20 +231,12 @@
             <div class="stat-item flex-1"><div class="stat-val">1.2M+</div><div class="stat-lab">Agent Trades</div></div>
             <div class="stat-item flex-1"><div class="stat-val">850+</div><div class="stat-lab">Integrations</div></div>
         </div>
-
     </main>
 
     <!-- Footer -->
     <footer class="h-12 bg-wooBlack/90 backdrop-blur-md px-8 border-t border-wooLine flex items-center justify-between text-[11px] text-wooGray">
-        <div class="flex items-center gap-4 opacity-50">
-            <span>© 2026 WOO. All Rights Reserved.</span>
-        </div>
-        <div class="flex gap-6 items-center">
-            <a href="#" class="hover:text-white transition">Feedback</a>
-            <a href="#" class="hover:text-white transition">Careers</a>
-            <a href="#" class="hover:text-white transition">Docs</a>
-            <a href="#" class="hover:text-white transition text-wooCyan">Developers</a>
-        </div>
+        <div class="flex items-center gap-4 opacity-50"><span>© 2026 WOO. All Rights Reserved.</span></div>
+        <div class="flex gap-6 items-center"><a href="#" class="hover:text-white transition">Feedback</a><a href="#" class="hover:text-white transition">Careers</a><a href="#" class="hover:text-white transition">Docs</a><a href="#" class="hover:text-white transition text-wooCyan">Developers</a></div>
     </footer>
 
 </body>
