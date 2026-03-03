@@ -92,7 +92,7 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             display: flex;
             flex-direction: column;
-            min-height: 380px;
+            min-height: 400px;
         }
         .path-card:hover { border-color: rgba(0, 181, 255, 0.4); transform: translateY(-8px); background: #181C23; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         
@@ -104,32 +104,38 @@
             background: #1E2329;
             border: 1px solid rgba(0, 181, 255, 0.15);
             border-radius: 12px;
-            padding: 18px;
+            padding: 24px;
             font-family: 'JetBrains Mono', monospace;
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+            flex: 1;
         }
 
         .human-btn-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 16px;
+            flex: 1;
         }
         .human-btn {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 16px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
+            font-weight: 800;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
             transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         .human-btn:hover {
             background: rgba(0, 181, 255, 0.05);
-            border-color: rgba(0, 181, 255, 0.2);
+            border-color: rgba(0, 181, 255, 0.3);
             color: #00B5FF;
             transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .dropdown-menu { 
@@ -196,63 +202,59 @@
             </p>
         </div>
 
-        <!-- Identity Choice (V2: Agent on Left, Human on Right) -->
+        <!-- Identity Choice (V2: Agent Left, Human Right) -->
         <div class="flex flex-col md:flex-row gap-6 w-full max-w-5xl mx-auto mb-14 animate-fade-up">
             
-            <!-- Path: Agent (Now on LEFT) -->
+            <!-- Path: Agent (LEFT) -->
             <div class="flex-1 path-card p-10 group cursor-pointer border-wooCyan/20 bg-wooCyan/[0.02]">
-                <div class="flex items-center gap-4 mb-6">
+                <div class="flex items-center gap-4 mb-8">
                     <div class="w-10 h-10 bg-wooCyan/10 rounded-xl flex items-center justify-center border border-wooCyan/20 group-hover:bg-wooCyan group-hover:text-wooBlack transition-all duration-500">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                     </div>
                     <h3 class="text-2xl font-bold woo-gradient-text">I'm an Agent</h3>
                 </div>
                 
-                <div class="agent-terminal mt-auto group-hover:border-wooCyan/40 transition-all">
-                    <div class="flex justify-between items-center mb-4 border-b border-white/10 pb-2">
-                        <span class="text-[10px] text-wooCyan font-bold tracking-widest opacity-90">AGENT PROTOCOL V1.0</span>
+                <div class="agent-terminal group-hover:border-wooCyan/40 transition-all">
+                    <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+                        <span class="text-[10px] text-wooCyan font-bold tracking-widest opacity-90 uppercase">Agent Protocol V1.0</span>
                         <div class="flex gap-1.5">
                             <div class="w-2 h-2 rounded-full bg-red-500/60"></div>
                             <div class="w-2 h-2 rounded-full bg-yellow-500/60"></div>
                             <div class="w-2 h-2 rounded-full bg-green-500/60"></div>
                         </div>
                     </div>
-                    <div class="space-y-4">
+                    <div class="space-y-6">
                         <div>
-                            <p class="text-white/40 text-[9px] uppercase tracking-tighter mb-1 font-bold">Definition File</p>
+                            <p class="text-white/40 text-[9px] uppercase tracking-tighter mb-2 font-bold">Definition File</p>
                             <a href="https://woofi.com/skill.md" class="text-wooCyan text-[11px] hover:text-white transition-colors block truncate font-mono">https://woofi.com/skill.md</a>
                         </div>
                         <div>
-                            <p class="text-white/40 text-[9px] uppercase tracking-tighter mb-1 font-bold">Context File</p>
+                            <p class="text-white/40 text-[9px] uppercase tracking-tighter mb-2 font-bold">Context File</p>
                             <a href="https://api.woofi.com/llms.txt" class="text-wooCyan text-[11px] hover:text-white transition-colors block truncate font-mono">https://api.woofi.com/llms.txt</a>
                         </div>
-                        <div class="pt-1 border-t border-white/5">
-                            <code class="text-white/30 text-[10px]">$ openclaw skill install woofi</code>
+                        <div class="pt-2 border-t border-white/5 opacity-30">
+                            <code class="text-white text-[10px]">$ openclaw skill install woofi</code>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Path: Human (Now on RIGHT, Grid Buttons) -->
+            <!-- Path: Human (RIGHT - Grid Buttons, No Long Launch Btn) -->
             <div class="flex-1 path-card p-10 group cursor-pointer">
                 <div class="flex items-center gap-4 mb-8">
-                    <div class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center border border-white/5 group-hover:woo-gradient-bg group-hover:text-wooBlack transition-all duration-500">
+                    <div class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center border border-white/5 group-hover:woo-gradient-bg group-hover:text-wooBlack transition-all duration-500 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                     </div>
                     <h3 class="text-2xl font-bold text-white group-hover:text-wooCyan transition-colors">I'm a Human</h3>
                 </div>
 
-                <!-- 2x2 Grid of Function Buttons -->
-                <div class="human-btn-grid mb-8">
-                    <a href="https://woofi.com/swap/" class="human-btn">SWAP</a>
-                    <a href="https://woofi.com/" class="human-btn">PERPS</a>
-                    <a href="https://woofi.com/swap/earn" class="human-btn">EARN</a>
-                    <a href="https://woofi.com/swap/stake" class="human-btn">STAKE</a>
+                <!-- 2x2 Grid of High-Height Function Buttons -->
+                <div class="human-btn-grid">
+                    <a href="https://woofi.com/swap/" class="human-btn">Swap</a>
+                    <a href="https://woofi.com/" class="human-btn">Perps</a>
+                    <a href="https://woofi.com/swap/earn" class="human-btn">Earn</a>
+                    <a href="https://woofi.com/swap/stake" class="human-btn">Stake</a>
                 </div>
-
-                <a href="https://woofi.com/" class="mt-auto woo-gradient-bg text-wooBlack font-bold py-3.5 px-6 rounded-2xl text-[15px] text-center hover:opacity-90 transition-all shadow-[0_0_40px_rgba(0,181,255,0.1)]">
-                    Launch Exchange
-                </a>
             </div>
 
         </div>
