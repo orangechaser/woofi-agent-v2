@@ -96,7 +96,7 @@
         }
         .action-btn {
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(0, 181, 255, 0.15); /* Distinctive subtle border */
+            border: 1px solid rgba(0, 181, 255, 0.15); 
             border-radius: 12px;
             padding: 12px 14px;
             display: flex;
@@ -172,12 +172,15 @@
                 </div>
                 <div class="agent-terminal flex-1">
                     <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-3">
-                        <span class="text-[9px] text-wooCyan font-bold tracking-widest opacity-80 uppercase">Protocol V1.0</span>
+                        <span class="text-[9px] text-wooCyan font-bold tracking-widest opacity-90 uppercase">Protocol V1.0</span>
                         <div class="flex gap-1"><div class="w-1.5 h-1.5 rounded-full bg-red-500/40"></div><div class="w-1.5 h-1.5 rounded-full bg-yellow-500/40"></div><div class="w-1.5 h-1.5 rounded-full bg-green-500/40"></div></div>
                     </div>
                     <div class="space-y-5">
                         <div><p class="text-white/30 text-[8px] uppercase tracking-tighter mb-1">Context</p><a href="https://api.woofi.com/llms.txt" class="text-wooCyan text-[10px] hover:text-white transition-colors block truncate font-mono">api.woofi.com/llms.txt</a></div>
                         <div><p class="text-white/30 text-[8px] uppercase tracking-tighter mb-1">Definition</p><a href="https://woofi.com/skill.md" class="text-wooCyan text-[10px] hover:text-white transition-colors block truncate font-mono">woofi.com/skill.md</a></div>
+                        <div class="pt-2 border-t border-white/5">
+                            <code class="text-green-400 opacity-90 text-[10px]">$ openclaw skill install woofi</code>
+                        </div>
                     </div>
                 </div>
             </div>
