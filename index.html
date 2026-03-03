@@ -94,7 +94,7 @@
             flex-direction: column;
             min-height: 400px;
         }
-        .path-card:hover { border-color: rgba(0, 181, 255, 0.4); transform: translateY(-8px); background: #181C23; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .path-card:hover { border-color: rgba(0, 181, 255, 0.3); transform: translateY(-8px); background: #181C23; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         
         .stat-item { border-left: 1px solid rgba(0, 181, 255, 0.1); padding-left: 20px; }
         .stat-val { font-family: 'Oswald', sans-serif; font-size: 28px; color: #00B5FF; line-height: 1; }
@@ -118,24 +118,33 @@
         }
         .human-btn {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 181, 255, 0.1); /* Subtle Cyan Border */
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 16px;
             font-weight: 800;
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.6); /* Brightened text */
             transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+        }
+        .human-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 181, 255, 0.05) 0%, transparent 100%);
+            opacity: 0.5;
         }
         .human-btn:hover {
-            background: rgba(0, 181, 255, 0.05);
-            border-color: rgba(0, 181, 255, 0.3);
-            color: #00B5FF;
+            background: rgba(0, 181, 255, 0.1);
+            border-color: rgba(0, 181, 255, 0.5);
+            color: #FFFFFF;
             transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 181, 255, 0.2);
         }
 
         .dropdown-menu { 
@@ -202,10 +211,10 @@
             </p>
         </div>
 
-        <!-- Identity Choice (V2: Agent Left, Human Right) -->
+        <!-- Identity Choice -->
         <div class="flex flex-col md:flex-row gap-6 w-full max-w-5xl mx-auto mb-14 animate-fade-up">
             
-            <!-- Path: Agent (LEFT) -->
+            <!-- Path: Agent -->
             <div class="flex-1 path-card p-10 group cursor-pointer border-wooCyan/20 bg-wooCyan/[0.02]">
                 <div class="flex items-center gap-4 mb-8">
                     <div class="w-10 h-10 bg-wooCyan/10 rounded-xl flex items-center justify-center border border-wooCyan/20 group-hover:bg-wooCyan group-hover:text-wooBlack transition-all duration-500">
@@ -239,7 +248,7 @@
                 </div>
             </div>
 
-            <!-- Path: Human (RIGHT - Grid Buttons, No Long Launch Btn) -->
+            <!-- Path: Human (Refined Grid Styling) -->
             <div class="flex-1 path-card p-10 group cursor-pointer">
                 <div class="flex items-center gap-4 mb-8">
                     <div class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center border border-white/5 group-hover:woo-gradient-bg group-hover:text-wooBlack transition-all duration-500 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
@@ -248,7 +257,7 @@
                     <h3 class="text-2xl font-bold text-white group-hover:text-wooCyan transition-colors">I'm a Human</h3>
                 </div>
 
-                <!-- 2x2 Grid of High-Height Function Buttons -->
+                <!-- 2x2 Grid of Refined Function Buttons -->
                 <div class="human-btn-grid">
                     <a href="https://woofi.com/swap/" class="human-btn">Swap</a>
                     <a href="https://woofi.com/" class="human-btn">Perps</a>
