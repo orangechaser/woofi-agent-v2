@@ -13,10 +13,11 @@
             --woo-dark: #181C23;
             --woo-card-alt: #1E2329;
             --woo-cyan: #26FEFE;
+            --woo-blue: #59B0FE;
             --woo-line: rgba(255, 255, 255, 0.08);
             --woo-text-main: #FFFFFF;
             --woo-text-sec: rgba(255, 255, 255, 0.54);
-            --woo-gradient: linear-gradient(90deg, #59B0FE, #26FEFE);
+            --woo-gradient: linear-gradient(90deg, #59B0FE 0%, #26FEFE 100%);
         }
 
         * {
@@ -47,6 +48,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
 
         .font-din {
@@ -350,7 +352,6 @@
 
         .terminal-status {
             font-size: 9px;
-            color: var(--woo-cyan);
             font-weight: bold;
             letter-spacing: 0.1em;
             opacity: 0.8;
@@ -387,7 +388,6 @@
         }
 
         .terminal-field__value {
-            color: var(--woo-cyan);
             font-size: 10px;
             text-decoration: none;
             transition: color 0.2s;
@@ -488,7 +488,6 @@
         .stat-val {
             font-family: 'Oswald', sans-serif;
             font-size: 26px;
-            color: var(--woo-cyan);
             line-height: 1;
         }
 
@@ -602,6 +601,16 @@
 </head>
 <body class="grid-bg">
 
+    <!-- Global SVG Gradient Definition -->
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="icon_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#59B0FE" />
+                <stop offset="100%" stop-color="#26FEFE" />
+            </linearGradient>
+        </defs>
+    </svg>
+
     <!-- Header -->
     <nav class="navbar">
         <div class="navbar__left">
@@ -664,13 +673,13 @@
             <div class="path-card path-card--agent">
                 <div class="path-card__header">
                     <div class="path-card__icon-box">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 8V4H8"></path><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="url(#icon_grad)" stroke-width="2.5"><path d="M12 8V4H8"></path><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
                     </div>
                     <h3 class="path-card__title woo-gradient-text">I'm an agent</h3>
                 </div>
                 <div class="agent-terminal">
                     <div class="terminal-header">
-                        <span class="terminal-status">Protocol V1.0</span>
+                        <span class="terminal-status woo-gradient-text">Protocol V1.0</span>
                         <div class="terminal-dots">
                             <div class="dot dot--red"></div>
                             <div class="dot dot--yellow"></div>
@@ -680,11 +689,11 @@
                     <div class="terminal-content">
                         <div class="terminal-field">
                             <p class="terminal-field__label">Context</p>
-                            <a href="https://api.woofi.com/llms.txt" class="terminal-field__value font-mono">api.woofi.com/llms.txt</a>
+                            <a href="https://api.woofi.com/llms.txt" class="terminal-field__value woo-gradient-text font-mono">api.woofi.com/llms.txt</a>
                         </div>
                         <div class="terminal-field">
                             <p class="terminal-field__label">Definition</p>
-                            <a href="https://woofi.com/skill.md" class="terminal-field__value font-mono">woofi.com/skill.md</a>
+                            <a href="https://woofi.com/skill.md" class="terminal-field__value woo-gradient-text font-mono">woofi.com/skill.md</a>
                         </div>
                         <div class="terminal-command">
                             <code>$ install @woofi/agent</code>
@@ -704,7 +713,7 @@
                 <div class="feature-list">
                     <div class="feature-item">
                         <a href="https://woofi.com/" class="action-btn animate-pulse-subtle">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#26FEFE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#icon_grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 12c-3.5-4.5-9-4.5-9 0s5.5 4.5 9 0c3.5-4.5 9-4.5 9 0s-5.5 4.5-9 0z" />
                             </svg>
                             PERPS
@@ -713,21 +722,21 @@
                     </div>
                     <div class="feature-item">
                         <a href="https://woofi.com/swap/" class="action-btn animate-pulse-subtle" style="animation-delay: 0.5s;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#26FEFE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m17 10 4-4-4-4"/><path d="M3 6h18"/><path d="m7 14-4 4 4 4"/><path d="M3 18h18"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="url(#icon_grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m17 10 4-4-4-4"/><path d="M3 6h18"/><path d="m7 14-4 4 4 4"/><path d="M3 18h18"/></svg>
                             SWAP
                         </a>
                         <p class="feature-desc">Swap any asset across any chain with ultra-low slippage</p>
                     </div>
                     <div class="feature-item">
                         <a href="https://woofi.com/swap/earn" class="action-btn animate-pulse-subtle" style="animation-delay: 1s;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#26FEFE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="url(#icon_grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                             EARN
                         </a>
                         <p class="feature-desc">Get real yield on single-asset deposits with zero impermanent loss</p>
                     </div>
                     <div class="feature-item">
                         <a href="https://woofi.com/swap/stake" class="action-btn animate-pulse-subtle" style="animation-delay: 1.5s;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#26FEFE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7L12 12L22 7L12 2Z M2 12L12 17L22 12 M2 17L12 22L22 17"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="url(#icon_grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7L12 12L22 7L12 2Z M2 12L12 17L22 12 M2 17L12 22L22 17"/></svg>
                             STAKE
                         </a>
                         <p class="feature-desc">Earn revenue share, unlock fee discounts, and access more rewards</p>
@@ -739,10 +748,10 @@
 
         <!-- Stats Row -->
         <div class="stats-bar">
-            <div class="stat-item"><div class="stat-val">$18.4B+</div><div class="stat-lab">Spot vol</div></div>
-            <div class="stat-item"><div class="stat-val">$32.1B+</div><div class="stat-lab">Perp vol</div></div>
-            <div class="stat-item"><div class="stat-val">325M+</div><div class="stat-lab">WOO staked</div></div>
-            <div class="stat-item"><div class="stat-val">20+</div><div class="stat-lab">Chains supported</div></div>
+            <div class="stat-item"><div class="stat-val woo-gradient-text">$18.4B+</div><div class="stat-lab">Spot vol</div></div>
+            <div class="stat-item"><div class="stat-val woo-gradient-text">$32.1B+</div><div class="stat-lab">Perp vol</div></div>
+            <div class="stat-item"><div class="stat-val woo-gradient-text">325M+</div><div class="stat-lab">WOO staked</div></div>
+            <div class="stat-item"><div class="stat-val woo-gradient-text">20+</div><div class="stat-lab">Chains supported</div></div>
         </div>
     </main>
 
