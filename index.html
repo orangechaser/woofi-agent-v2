@@ -4,55 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WOOFi | AGENT-FIRST ONCHAIN LIQUIDITY LAYER.</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        wooBlack: '#07080A',
-                        wooDarker: '#131519',
-                        wooDark: '#181C23',
-                        wooCardAlt: '#1E2329',
-                        wooCyan: '#26FEFE',     
-                        wooLine: 'rgba(255, 255, 255, 0.08)',
-                        wooTextMain: '#FFFFFF',
-                        wooTextSec: 'rgba(255, 255, 255, 0.54)',
-                    },
-                    fontFamily: {
-                        din: ['Oswald', 'Inter', 'sans-serif'],
-                    },
-                    animation: {
-                        'pulse-subtle': 'pulse-subtle 3s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        'pulse-subtle': {
-                            '0%, 100%': { opacity: 1, borderColor: 'rgba(0, 181, 255, 0.2)' },
-                            '50%': { opacity: 0.8, borderColor: 'rgba(0, 181, 255, 0.4)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #07080A; color: #FFFFFF; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        /* --- Root Variables & Base Styles --- */
+        :root {
+            --woo-black: #07080A;
+            --woo-darker: #131519;
+            --woo-dark: #181C23;
+            --woo-card-alt: #1E2329;
+            --woo-cyan: #26FEFE;
+            --woo-line: rgba(255, 255, 255, 0.08);
+            --woo-text-main: #FFFFFF;
+            --woo-text-sec: rgba(255, 255, 255, 0.54);
+            --woo-gradient: linear-gradient(90deg, #26FEFE 0%, #26FEFE 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--woo-black);
+            color: var(--woo-text-main);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
         .grid-bg {
-            background-image: radial-gradient(rgba(0, 181, 255, 0.06) 1px, transparent 1px);
+            background-image: radial-gradient(rgba(38, 254, 254, 0.06) 1px, transparent 1px);
             background-size: 32px 32px;
         }
+
+        /* --- Typography --- */
         .woo-gradient-text {
-            background: linear-gradient(90deg, #59B0FE 0%, #26FEFE 100%);
+            background: var(--woo-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .nav-link { color: rgba(255, 255, 255, 0.54); font-weight: 500; font-size: 14px; transition: color 0.2s; }
-        .nav-link:hover { color: #FFFFFF; }
-        
+
+        .font-din {
+            font-family: 'Oswald', 'Inter', sans-serif;
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 32px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(7, 8, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--woo-line);
+        }
+
+        .navbar__left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .navbar__logo-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar__logo-svg {
+            height: 28px;
+            width: auto;
+        }
+
+        .navbar__links {
+            display: none;
+            align-items: center;
+            gap: 28px;
+            height: 64px;
+        }
+
+        @media (min-width: 1024px) {
+            .navbar__links {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            color: var(--woo-text-sec);
+            font-weight: 500;
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--woo-text-main);
+        }
+
+        /* --- Dropdown --- */
+        .dropdown-container {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-container__trigger {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% - 10px);
+            left: 0;
+            background: var(--woo-darker);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            min-width: 140px;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .dropdown-container:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 8px 16px;
+            font-size: 13px;
+            color: var(--woo-text-sec);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--woo-text-main);
+        }
+
+        /* --- Buttons --- */
         .launch-btn {
-            background: linear-gradient(90deg, #59B0FE 0%, #26FEFE 100%);
-            color: #07080A;
+            background: var(--woo-gradient);
+            color: var(--woo-black);
             font-weight: 800;
             border-radius: 999px;
             padding: 3px 3px 3px 18px;
@@ -60,74 +166,448 @@
             align-items: center;
             gap: 10px;
             font-size: 12px;
+            text-decoration: none;
         }
+
         .circle-arrow {
-            width: 28px; height: 28px; background: #07080A; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; color: #26FEFE;
+            width: 28px;
+            height: 28px;
+            background: var(--woo-black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--woo-cyan);
         }
 
-        .path-card { 
-            background: #131519; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; 
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            display: flex; flex-direction: column; padding: 40px; flex: 1;
-        }
-        .path-card:hover { border-color: rgba(38, 254, 254, 0.3); transform: translateY(-4px); }
-        
-        .stat-item { border-left: 1px solid rgba(38, 254, 254, 0.1); padding-left: 20px; }
-        .stat-val { font-family: 'Oswald', sans-serif; font-size: 26px; color: #26FEFE; line-height: 1; }
-        .stat-lab { font-size: 10px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-
-        .agent-terminal {
-            background: #1E2329; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
-            padding: 24px; font-family: 'JetBrains Mono', monospace; height: 100%;
-        }
-
-        .feature-item {
-            display: grid; grid-template-columns: 100px 1fr; gap: 16px; align-items: center;
-        }
-        @media (min-width: 768px) {
-            .feature-item {
-                grid-template-columns: 120px 1fr; gap: 20px;
-            }
-        }
         .action-btn {
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(38, 254, 254, 0.15); 
-            border-radius: 12px; padding: 12px 14px;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            font-size: 11px; font-weight: 800; color: #FFFFFF;
-            text-transform: uppercase; letter-spacing: 0.05em;
+            border: 1px solid rgba(38, 254, 254, 0.15);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--woo-text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
+
         .action-btn:hover {
             background: rgba(38, 254, 254, 0.15);
             border-color: rgba(38, 254, 254, 0.6);
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(38, 254, 254, 0.2);
         }
-        .feature-desc { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.5; }
 
-        /* Dropdown Fix */
-        .dropdown-container { position: relative; height: 100%; display: flex; align-items: center; }
-        .dropdown-menu { 
-            display: none; position: absolute; top: calc(100% - 10px); left: 0; 
-            background: #131519; border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 12px; padding: 10px; min-width: 140px; z-index: 100;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* --- Main Layout --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 64px 32px;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
         }
-        .dropdown-container:hover .dropdown-menu { display: block; }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-section__title {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: -0.025em;
+            color: var(--woo-text-main);
+            margin-bottom: 12px;
+            text-transform: none;
+        }
+
+        @media (min-width: 768px) {
+            .hero-section__title {
+                font-size: 38px;
+            }
+        }
+
+        .hero-section__subtitle {
+            color: var(--woo-text-sec);
+            font-size: 14px;
+            max-width: 512px;
+            margin: 0 auto;
+            line-height: 1.625;
+        }
+
+        @media (min-width: 768px) {
+            .hero-section__subtitle {
+                font-size: 15px;
+            }
+        }
+
+        /* --- Path Cards --- */
+        .path-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto 48px auto;
+        }
+
+        @media (min-width: 768px) {
+            .path-grid {
+                flex-direction: row;
+                align-items: stretch;
+            }
+        }
+
+        .path-card {
+            background: var(--woo-darker);
+            border: 1px solid var(--woo-line);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            flex: 1;
+        }
+
+        .path-card:hover {
+            border-color: rgba(38, 254, 254, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .path-card--agent {
+            border-color: rgba(38, 254, 254, 0.2);
+            background-color: rgba(38, 254, 254, 0.01);
+        }
+
+        .path-card__header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .path-card__icon-box {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .path-card--agent .path-card__icon-box {
+            background-color: rgba(38, 254, 254, 0.1);
+            border-color: rgba(38, 254, 254, 0.2);
+            color: var(--woo-cyan);
+        }
+
+        .path-card:hover .path-card__icon-box {
+             background-color: var(--woo-cyan);
+             color: var(--woo-black);
+             border-color: var(--woo-cyan);
+        }
+
+        .path-card__title {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: -0.025em;
+        }
+
+        /* --- Agent Terminal --- */
+        .agent-terminal {
+            background: var(--woo-card-alt);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            height: 100%;
+            flex: 1;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 12px;
+        }
+
+        .terminal-status {
+            font-size: 9px;
+            color: var(--woo-cyan);
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .dot--red { background-color: rgba(239, 68, 68, 0.4); }
+        .dot--yellow { background-color: rgba(234, 179, 8, 0.4); }
+        .dot--green { background-color: rgba(34, 197, 94, 0.4); }
+
+        .terminal-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .terminal-field__label {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+            margin-bottom: 4px;
+        }
+
+        .terminal-field__value {
+            color: var(--woo-cyan);
+            font-size: 10px;
+            text-decoration: none;
+            transition: color 0.2s;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .terminal-field__value:hover {
+            color: var(--woo-text-main);
+        }
+
+        .terminal-command {
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .terminal-command code {
+            color: #4ade80;
+            opacity: 0.9;
+            font-size: 10px;
+        }
+
+        /* --- Human Features --- */
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 16px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .feature-item {
+                grid-template-columns: 120px 1fr;
+                gap: 20px;
+            }
+        }
+
+        .feature-desc {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+
+        /* --- Animations --- */
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; border-color: rgba(38, 254, 254, 0.15); }
+            50% { opacity: 0.8; border-color: rgba(38, 254, 254, 0.4); }
+        }
+
+        .animate-pulse-subtle {
+            animation: pulse-subtle 3s ease-in-out infinite;
+        }
+
+        /* --- Stats --- */
+        .stats-bar {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--woo-line);
+            border-bottom: 1px solid var(--woo-line);
+            gap: 32px 0;
+        }
+
+        @media (min-width: 768px) {
+            .stats-bar {
+                justify-content: space-between;
+                gap: 0;
+            }
+        }
+
+        .stat-item {
+            flex: 0 0 50%;
+            border-left: 1px solid rgba(38, 254, 254, 0.1);
+            padding-left: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .stat-item {
+                flex: 1;
+            }
+        }
+
+        .stat-val {
+            font-family: 'Oswald', sans-serif;
+            font-size: 26px;
+            color: var(--woo-cyan);
+            line-height: 1;
+        }
+
+        .stat-lab {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: rgba(7, 8, 10, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 40px 32px;
+            border-top: 1px solid var(--woo-line);
+            color: var(--woo-text-sec);
+        }
+
+        .footer__container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+
+        @media (min-width: 1024px) {
+            .footer__container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .footer__brand {
+            flex: 1;
+            max-width: 320px;
+        }
+
+        .footer__logo-svg {
+            height: 32px;
+            width: auto;
+            margin-bottom: 32px;
+        }
+
+        .footer__about {
+            font-size: 13px;
+            line-height: 1.625;
+            opacity: 0.6;
+        }
+
+        .footer__links-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 64px;
+        }
+
+        @media (min-width: 1024px) {
+            .footer__links-group {
+                gap: 96px;
+            }
+        }
+
+        .footer__column-title {
+            color: var(--woo-text-main);
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .footer__list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            font-size: 13px;
+            opacity: 0.6;
+        }
+
+        .footer__social {
+            max-width: 256px;
+        }
+
+        @media (min-width: 1024px) {
+            .footer__social {
+                width: 256px;
+            }
+        }
+
+        .footer__social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            opacity: 0.6;
+            margin-bottom: 40px;
+        }
+
+        .social-placeholder {
+            width: 24px;
+            height: 24px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .footer__copyright {
+            font-size: 11px;
+            opacity: 0.4;
+        }
     </style>
 </head>
-<body class="grid-bg min-h-screen flex flex-col">
+<body class="grid-bg">
 
     <!-- Header -->
-    <nav class="h-16 flex justify-between items-center px-8 sticky top-0 z-50 bg-[#07080A]/90 backdrop-blur-xl border-b border-wooLine">
-        <div class="flex items-center gap-10">
-            <div class="flex items-center">
+    <nav class="navbar">
+        <div class="navbar__left">
+            <div class="navbar__logo-link">
                 <a href="https://woofi.com/">
-                    <svg id="WOOFi_Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265.91 54" class="h-7 w-auto">
-                        <defs><linearGradient id="woo_grad" x1="242.02" y1="-2.26" x2="204.93" y2="50.71" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#59B0FE"/><stop offset="1" stop-color="#26FEFE"/></linearGradient></defs>
+                    <svg id="WOOFi_Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265.91 54" class="navbar__logo-svg">
+                        <defs><linearGradient id="woo_grad" x1="242.02" y1="-2.26" x2="204.93" y2="50.71" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#26FEFE"/><stop offset="1" stop-color="#26FEFE"/></linearGradient></defs>
                         <g fill="#fff">
                             <path d="m108.57,0c-14.91,0-27,12.09-27,27s12.09,27,27,27,27-12.09,27-27S123.48,0,108.57,0Zm0,41.5c-8.01,0-14.5-6.49-14.5-14.5s6.49-14.5,14.5-14.5,14.5,6.49,14.5,14.5-6.49,14.5-14.5,14.5Z"/><path d="m171.57,0c-14.91,0-27,12.09-27,27s12.09,27,27,27,27-12.09,27-27S186.48,0,171.57,0Zm0,41.5c-8.01,0-14.5-6.49-14.5-14.5s6.49-14.5,14.5-14.5,14.5,6.49,14.5,14.5-6.49,14.5-14.5,14.5Z"/><path d="m0,1h13.07l10.27,33.58,7-17.33c.92-2.27,3.12-3.75,5.56-3.75h4.98c2.45,0,4.65,1.48,5.56,3.75l7,17.33,3.85-12.58h13.07l-8.18,26.75c-.77,2.52-3.1,4.25-5.74,4.25h-4.58c-2.45,0-4.65-1.48-5.56-3.75l-7.91-19.57-7.91,19.57c-.92,2.27-3.12,3.75-5.56,3.75h-4.58c-2.64,0-4.97-1.72-5.74-4.25L0,1Z"/><polygon points="63.71 1 59.89 13.5 72.96 13.5 76.79 1 63.71 1"/>
                         </g>
@@ -135,67 +615,92 @@
                     </svg>
                 </a>
             </div>
-            <div class="hidden lg:flex items-center gap-7 h-16">
+            <div class="navbar__links">
                 <a href="https://woofi.com/swap/" class="nav-link">Swap</a>
                 <a href="https://woofi.com/en/trade/" class="nav-link">Perps</a>
                 <a href="https://woofi.com/swap/earn" class="nav-link">Earn</a>
                 <a href="https://woofi.com/swap/stake" class="nav-link">Stake</a>
-                <div class="dropdown-container group">
-                    <div class="flex items-center gap-1 nav-link cursor-pointer">More <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+                <div class="dropdown-container">
+                    <div class="dropdown-container__trigger nav-link">
+                        More 
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
                     <div class="dropdown-menu">
-                        <a href="https://learn.woofi.com/" class="dropdown-item block px-4 py-2 hover:bg-white/5 text-[13px] text-wooTextSec hover:text-white transition">Docs</a>
-                        <a href="https://stats.woofi.com/" class="dropdown-item block px-4 py-2 hover:bg-white/5 text-[13px] text-wooTextSec hover:text-white transition">Analytics</a>
-                        <a href="https://woofi.com/brand-kit" class="dropdown-item block px-4 py-2 hover:bg-white/5 text-[13px] text-wooTextSec hover:text-white transition">Brand Kit</a>
+                        <a href="https://learn.woofi.com/" class="dropdown-item">Docs</a>
+                        <a href="https://stats.woofi.com/" class="dropdown-item">Analytics</a>
+                        <a href="https://woofi.com/brand-kit" class="dropdown-item">Brand Kit</a>
                     </div>
                 </div>
             </div>
         </div>
-        <a href="https://woofi.com/" class="launch-btn">LAUNCH APP<div class="circle-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div></a>
+        <a href="https://woofi.com/" class="launch-btn">
+            LAUNCH APP
+            <div class="circle-arrow">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </div>
+        </a>
     </nav>
 
     <!-- Main Hero -->
-    <main class="flex-1 flex flex-col justify-center px-8 py-16 max-w-7xl mx-auto w-full">
-        <div class="text-center mb-10">
-            <h1 class="font-din text-[32px] md:text-[38px] font-bold tracking-tight text-white mb-3">
+    <main class="main-content">
+        <section class="hero-section">
+            <h1 class="hero-section__title font-din">
                 <span class="woo-gradient-text uppercase">AGENT-FIRST</span> ONCHAIN LIQUIDITY LAYER.
             </h1>
-            <p class="text-wooTextSec text-[14px] md:text-[15px] max-w-xl mx-auto leading-relaxed">
+            <p class="hero-section__subtitle">
                 Purpose-built infra connecting autonomous agents to deep liquidity
             </p>
-        </div>
+        </section>
 
-        <div class="flex flex-col md:flex-row items-stretch gap-6 w-full max-w-5xl mx-auto mb-12">
+        <div class="path-grid">
             
-            <!-- Path: Agent (Robot Icon + Lower Case) -->
-            <div class="path-card border-wooCyan/20 bg-wooCyan/[0.01]">
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="w-8 h-8 bg-wooCyan/10 rounded-lg flex items-center justify-center border border-wooCyan/20 group-hover:bg-wooCyan group-hover:text-wooBlack transition-all">
+            <!-- Path: Agent -->
+            <div class="path-card path-card--agent">
+                <div class="path-card__header">
+                    <div class="path-card__icon-box">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 8V4H8"></path><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold woo-gradient-text tracking-tight">I'm an agent</h3>
+                    <h3 class="path-card__title woo-gradient-text">I'm an agent</h3>
                 </div>
-                <div class="agent-terminal flex-1">
-                    <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-3">
-                        <span class="text-[9px] text-wooCyan font-bold tracking-widest opacity-80 uppercase">Protocol V1.0</span>
-                        <div class="flex gap-1"><div class="w-1.5 h-1.5 rounded-full bg-red-500/40"></div><div class="w-1.5 h-1.5 rounded-full bg-yellow-500/40"></div><div class="w-1.5 h-1.5 rounded-full bg-green-500/40"></div></div>
+                <div class="agent-terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-status">Protocol V1.0</span>
+                        <div class="terminal-dots">
+                            <div class="dot dot--red"></div>
+                            <div class="dot dot--yellow"></div>
+                            <div class="dot dot--green"></div>
+                        </div>
                     </div>
-                    <div class="space-y-5">
-                        <div><p class="text-white/30 text-[8px] uppercase tracking-tighter mb-1">Context</p><a href="https://api.woofi.com/llms.txt" class="text-wooCyan text-[10px] hover:text-white transition-colors block truncate font-mono">api.woofi.com/llms.txt</a></div>
-                        <div><p class="text-white/30 text-[8px] uppercase tracking-tighter mb-1">Definition</p><a href="https://woofi.com/skill.md" class="text-wooCyan text-[10px] hover:text-white transition-colors block truncate font-mono">woofi.com/skill.md</a></div>
-                        <div class="pt-2 border-t border-white/5"><code class="text-green-400 opacity-90 text-[10px]">$ install @woofi/agent</code></div>
+                    <div class="terminal-content">
+                        <div class="terminal-field">
+                            <p class="terminal-field__label">Context</p>
+                            <a href="https://api.woofi.com/llms.txt" class="terminal-field__value font-mono">api.woofi.com/llms.txt</a>
+                        </div>
+                        <div class="terminal-field">
+                            <p class="terminal-field__label">Definition</p>
+                            <a href="https://woofi.com/skill.md" class="terminal-field__value font-mono">woofi.com/skill.md</a>
+                        </div>
+                        <div class="terminal-command">
+                            <code>$ install @woofi/agent</code>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Path: Human (Lower Case + Screenshot Icons) -->
+            <!-- Path: Human -->
             <div class="path-card">
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center border border-white/5 group-hover:woo-gradient-bg group-hover:text-wooBlack transition-all">
+                <div class="path-card__header">
+                    <div class="path-card__icon-box">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white group-hover:text-wooCyan transition-colors tracking-tight">I'm a human</h3>
+                    <h3 class="path-card__title">I'm a human</h3>
                 </div>
-                <div class="flex flex-col justify-between flex-1 gap-5">
+                <div class="feature-list">
                     <div class="feature-item">
                         <a href="https://woofi.com/" class="action-btn animate-pulse-subtle">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#26FEFE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -232,37 +737,37 @@
         </div>
 
         <!-- Stats Row -->
-        <div class="w-full max-w-5xl mx-auto flex flex-wrap justify-center md:justify-between items-center py-10 md:py-10 border-y border-wooLine gap-y-8">
-            <div class="stat-item flex-[0_0_50%] md:flex-1"><div class="stat-val">$18.4B+</div><div class="stat-lab">Spot vol</div></div>
-            <div class="stat-item flex-[0_0_50%] md:flex-1"><div class="stat-val">$32.1B+</div><div class="stat-lab">Perp vol</div></div>
-            <div class="stat-item flex-[0_0_50%] md:flex-1"><div class="stat-val">325M+</div><div class="stat-lab">WOO staked</div></div>
-            <div class="stat-item flex-[0_0_50%] md:flex-1"><div class="stat-val">20+</div><div class="stat-lab">Chains supported</div></div>
+        <div class="stats-bar">
+            <div class="stat-item"><div class="stat-val">$18.4B+</div><div class="stat-lab">Spot vol</div></div>
+            <div class="stat-item"><div class="stat-val">$32.1B+</div><div class="stat-lab">Perp vol</div></div>
+            <div class="stat-item"><div class="stat-val">325M+</div><div class="stat-lab">WOO staked</div></div>
+            <div class="stat-item"><div class="stat-val">20+</div><div class="stat-lab">Chains supported</div></div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-wooBlack/90 backdrop-blur-md px-8 py-10 border-t border-wooLine text-wooTextSec">
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-12">
+    <footer class="footer">
+        <div class="footer__container">
             <!-- Brand Column -->
-            <div class="flex-1 max-w-xs">
-                <svg id="WOOFi_Logo_Footer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265.91 54" class="h-8 w-auto mb-8">
-                    <defs><linearGradient id="woo_grad_footer" x1="242.02" y1="-2.26" x2="204.93" y2="50.71" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#59B0FE"/><stop offset="1" stop-color="#26FEFE"/></linearGradient></defs>
+            <div class="footer__brand">
+                <svg id="WOOFi_Logo_Footer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265.91 54" class="footer__logo-svg">
+                    <defs><linearGradient id="woo_grad_footer" x1="242.02" y1="-2.26" x2="204.93" y2="50.71" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#26FEFE"/><stop offset="1" stop-color="#26FEFE"/></linearGradient></defs>
                     <g fill="#fff">
                         <path d="m108.57,0c-14.91,0-27,12.09-27,27s12.09,27,27,27,27-12.09,27-27S123.48,0,108.57,0Zm0,41.5c-8.01,0-14.5-6.49-14.5-14.5s6.49-14.5,14.5-14.5,14.5,6.49,14.5,14.5-6.49,14.5-14.5,14.5Z"/><path d="m171.57,0c-14.91,0-27,12.09-27,27s12.09,27,27,27,27-12.09,27-27S186.48,0,171.57,0Zm0,41.5c-8.01,0-14.5-6.49-14.5-14.5s6.49-14.5,14.5-14.5,14.5,6.49,14.5,14.5-6.49,14.5-14.5,14.5Z"/><path d="m0,1h13.07l10.27,33.58,7-17.33c.92-2.27,3.12-3.75,5.56-3.75h4.98c2.45,0,4.65,1.48,5.56,3.75l7,17.33,3.85-12.58h13.07l-8.18,26.75c-.77,2.52-3.1,4.25-5.74,4.25h-4.58c-2.45,0-4.65-1.48-5.56-3.75l-7.91-19.57-7.91,19.57c-.92,2.27-3.12,3.75-5.56,3.75h-4.58c-2.64,0-4.97-1.72-5.74-4.25L0,1Z"/><polygon points="63.71 1 59.89 13.5 72.96 13.5 76.79 1 63.71 1"/>
                     </g>
                     <path fill="url(#woo_grad_footer)" d="m241.91,13.5V1h-22.25c-5.52,0-10,4.48-10,10v42.5h12v-19.5h20.25v-12h-20.25v-8.5h20.25Z"/><rect fill="url(#woo_grad_footer)" x="253.91" y="1" width="12" height="12.5"/><rect fill="url(#woo_grad_footer)" x="253.91" y="22" width="12" height="31.5"/>
                 </svg>
-                <p class="text-[13px] leading-relaxed opacity-60">
+                <p class="footer__about">
                     WOOFi is a leading DEX with $15B trading volume. It supports 11 blockchains and boasts a diverse range of products that include earn vaults, simple swaps, crosschain swaps, and perpetual futures. The WOO token can be staked to share 80% of all protocol fees.
                 </p>
             </div>
 
             <!-- Links Group -->
-            <div class="flex flex-wrap gap-16 lg:gap-24">
+            <div class="footer__links-group">
                 <!-- Services -->
                 <div>
-                    <h4 class="text-white font-bold text-[14px] mb-6">Services</h4>
-                    <ul class="space-y-4 text-[13px] opacity-60">
+                    <h4 class="footer__column-title">Services</h4>
+                    <ul class="footer__list">
                         <li>WOOFi Swap</li>
                         <li>WOOFi Pro</li>
                         <li>WOO Token</li>
@@ -272,8 +777,8 @@
 
                 <!-- Resources -->
                 <div>
-                    <h4 class="text-white font-bold text-[14px] mb-6">Resources</h4>
-                    <ul class="space-y-4 text-[13px] opacity-60">
+                    <h4 class="footer__column-title">Resources</h4>
+                    <ul class="footer__list">
                         <li>User docs</li>
                         <li>Integration Docs</li>
                         <li>GitHub</li>
@@ -283,8 +788,8 @@
 
                 <!-- Other -->
                 <div>
-                    <h4 class="text-white font-bold text-[14px] mb-6">Other</h4>
-                    <ul class="space-y-4 text-[13px] opacity-60">
+                    <h4 class="footer__column-title">Other</h4>
+                    <ul class="footer__list">
                         <li>About us</li>
                         <li>Our team</li>
                         <li>Careers</li>
@@ -294,15 +799,15 @@
             </div>
 
             <!-- Social Column -->
-            <div class="lg:w-64">
-                <h4 class="text-white font-bold text-[14px] mb-6">Stay Connected</h4>
-                <div class="flex flex-wrap gap-4 opacity-60 mb-10">
-                    <div class="w-6 h-6 bg-white/20 rounded-full"></div>
-                    <div class="w-6 h-6 bg-white/20 rounded-full"></div>
-                    <div class="w-6 h-6 bg-white/20 rounded-full"></div>
-                    <div class="w-6 h-6 bg-white/20 rounded-full"></div>
+            <div class="footer__social">
+                <h4 class="footer__column-title">Stay Connected</h4>
+                <div class="footer__social-icons">
+                    <div class="social-placeholder"></div>
+                    <div class="social-placeholder"></div>
+                    <div class="social-placeholder"></div>
+                    <div class="social-placeholder"></div>
                 </div>
-                <p class="text-[11px] opacity-40">Copyright © 2024 WOO All Rights Reserved.</p>
+                <p class="footer__copyright">Copyright © 2024 WOO All Rights Reserved.</p>
             </div>
         </div>
     </footer>
